@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A serverless application that retrieves posts from Patreon and sends them to Twitter and Discord.
+
+Resources:
+  MyApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      CodeUri: hello_world
+      Timeout: 30
+      Environment:
+        Variables:
+          PATRON_API_KEY: !Ref PatronApiKey
+          PATRON_CAMPAIGN_ID: !Ref PatronCampaignId
+          TWITTER_CONSUMER_KEY: !Ref TwitterConsumerKey
+          TWITTER_CONSUMER_SECRET: !Ref TwitterConsumerSecret
+          TWITTER_ACCESS_TOKEN: !Ref TwitterAccessToken
+          TWITTER_ACCESS_TOKEN_SECRET: !Ref TwitterAccessTokenSecret
+          DISCORD_BOT_TOKEN: !Ref DiscordBotToken
+          DISCORD_CHANNEL_ID: !Ref DiscordChannelId
+      Events:
+        ScheduledEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 15 * * ? *)  # Trigger at 11 PM SGT (UTC+8)
+
+Parameters:
+  PatronApiKey:
+    Type: String
+    Description: The API Key (Access Token) for Patreon.
+  PatronCampaignId:
+    Type: String
+    Description: The Campaign ID for Patreon.
+  TwitterConsumerKey:
+    Type: String
+    Description: The Consumer Key for Twitter API (OAuth 1.0a).
+  TwitterConsumerSecret:
+    Type: String
+    Description: The Consumer Secret for Twitter API (OAuth 1.0a).
+  TwitterAccessToken:
+    Type: String
+    Description: The Access Token for Twitter API (OAuth 1.0a).
+  TwitterAccessTokenSecret:
+    Type: String
+    Description: The Access Token Secret for Twitter API (OAuth 1.0a).
+  DiscordBotToken:
+    Type: String
+    Description: The Bot Token for Discord API.
+  DiscordChannelId:
+    Type: String
+    Description: The Channel ID for posting messages in Discord.

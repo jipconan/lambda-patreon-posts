@@ -1,10 +1,13 @@
-from dotenv import load_dotenv
+import json
 from patreon.fetch_post import fetch_posts
 from twitter.post_to_twitter import post_to_twitter
 from discord.post_to_discord import post_to_discord
-from src.message_template import create_message 
+from src.create_message import create_message
 
-load_dotenv()  # Load environment variables
+# Load the message template from the JSON file
+def load_message_template():
+    with open('src/message_template.json', 'r', encoding='utf-8') as f: 
+        return json.load(f)
 
 # Main lambda handler
 def lambda_handler(event, context):
@@ -12,11 +15,14 @@ def lambda_handler(event, context):
         same_day_posts = fetch_posts()
 
         if same_day_posts:
+            # Load the message template
+            json_template = load_message_template()
+
             # Generate the message using the template function
-            message = create_message(same_day_posts)
+            message = create_message(json_template, same_day_posts)
             
             # Post the combined message to Twitter and Discord
-            post_to_twitter(message)
+            # post_to_twitter(message)
             post_to_discord(message)
             print(f"Posted to Twitter and Discord: {message}")
         else:

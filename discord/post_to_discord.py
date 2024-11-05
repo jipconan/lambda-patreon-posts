@@ -1,5 +1,8 @@
 import requests
 import os
+from dotenv import load_dotenv
+
+load_dotenv("discord/.env")
 
 # Function to post a message to Discord
 def post_to_discord(message):

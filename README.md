@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a serverless application that automatically retrieves and shares the latest posts from a Patreon campaign on Twitter and Discord. It’s built using AWS Lambda and managed with AWS SAM (Serverless Application Model). By integrating with the Patreon API, Twitter API, and Discord API, the application automates the process of sharing new campaign posts with followers across platforms.
+This project is a serverless application that automatically retrieves and shares the latest posts from a Patreon campaign on Twitter and Discord. It’s built using AWS Lambda triggered by CloudWatch event. By integrating with the Patreon API, Twitter API, and Discord API, the application automates the process of sharing new campaign posts with followers across platforms.
 
 ## Functionality
 
@@ -22,12 +22,8 @@ The application performs several key functions:
 4. **Error Handling and Logging**  
    Errors encountered during API calls (e.g., failed authentication or posting issues) are logged to AWS CloudWatch, providing traceability and supporting troubleshooting.
 
-## Environment Configuration
-
-The application retrieves API keys, tokens, and campaign IDs securely from Lambda environment variables, protecting sensitive information. The AWS SAM template configures these values during deployment, eliminating the need to hardcode them in the source code.
-
 ## Usage
 
-This Lambda function is triggered on a set schedule, capturing the latest campaign content daily. Users can customize the posting schedule by updating the CloudFormation template. Deployment and updates are managed with AWS SAM.
+This Lambda function is triggered on a set schedule, capturing the latest campaign content daily. Users can customize the posting schedule by updating the configuration in the AWS console.
 
 ---

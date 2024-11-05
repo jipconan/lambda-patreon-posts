@@ -16,7 +16,7 @@ def lambda_handler(event, context):
             message = create_message(same_day_posts)
             
             # Post the combined message to Twitter and Discord
-            post_to_twitter("test8")
+            post_to_twitter(message)
             post_to_discord(message)
             print(f"Posted to Twitter and Discord: {message}")
         else:

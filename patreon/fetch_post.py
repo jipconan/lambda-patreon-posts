@@ -16,7 +16,13 @@ def fetch_posts(period=datetime.now(SINGAPORE_TZ).date()):
 
     # Make an API call to get today's posts
     response = requests.get(
-        f"https://www.patreon.com/api/oauth2/v2/campaigns/{campaign_id}/posts",
+        f"https://www.patreon.com/api/oauth2/v2/campaigns/{campaign_id}/posts?page%5Bcount%5D=10&sort=-published_at",
+        headers={"Authorization": f"Bearer {access_token}"},
+        params={"fields[post]": "title,content,published_at,url"}
+    )
+    while "next" in response.json().get('links', []):
+        response = requests.get(
+        response.json().get('links', [])["next"],
         headers={"Authorization": f"Bearer {access_token}"},
         params={"fields[post]": "title,content,published_at,url"}
     )
@@ -29,6 +35,8 @@ def fetch_posts(period=datetime.now(SINGAPORE_TZ).date()):
 
     posts = response.json().get('data', [])
 
+    print(response.json().get('links', []))
+    print(posts[0]['attributes']['published_at'])
     # Filter posts published today and extract necessary fields
     today_posts = []
     for post in posts:

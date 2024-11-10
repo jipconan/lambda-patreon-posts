@@ -1,5 +1,8 @@
 from requests_oauthlib import OAuth1Session
 import os
+from dotenv import load_dotenv
+
+load_dotenv("twitter/.env")
 
 # Function to post a message to Twitter with OAuth 1.0a
 def post_to_twitter(message):

@@ -15,19 +15,21 @@ def lambda_handler(event, context):
         same_day_posts = fetch_posts()
 
         if same_day_posts:
-            # Load the message template
+            # Load the message template``
             json_template = load_message_template()
 
             # Generate the message using the template function
-            message = create_message(json_template, same_day_posts)
+            messageTwitter = create_message(json_template, same_day_posts, "twitter")
+            messageDiscord = create_message(json_template, same_day_posts, "discord")
             
             # Post the combined message to Twitter and Discord
-            # post_to_twitter(message)
-            post_to_discord(message)
-            print(f"Posted to Twitter and Discord: {message}")
+            post_to_twitter(messageTwitter)
+            post_to_discord(messageDiscord)
+            print(f"Posted to Twitter: {messageTwitter}")
+            print(f"Posted to Discord: {messageDiscord}")
         else:
             print("No new posts today.")
     except Exception as e:
         print(f"Error occurred: {str(e)}")
 
-lambda_handler("", "")
+lambda_handler("","")

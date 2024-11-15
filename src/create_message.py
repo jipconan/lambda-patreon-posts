@@ -1,7 +1,16 @@
-# Function to create message from JSON template and fetched posts
 def create_message(json_template, posts, platform=""):
     # Patreon main URL
     base_url = "https://www.patreon.com"
+
+    # Color-to-heart mapping
+    color_to_emoji = {
+        "red": "❤️",
+        "blue": "💙",
+        "green": "💚",
+        "yellow": "💛",
+        "purple": "💜",
+        "black": "🖤",
+    }
 
     # Create empty message
     message = ""
@@ -26,7 +35,17 @@ def create_message(json_template, posts, platform=""):
     
     # Message, title: url
     for post in posts[:2]:  
-        message += f"💙 {post['title']}:\n🔗 {base_url}{post['url']}\n\n"
+        # Collect all matching colors
+        hearts = []
+        for color, emoji in color_to_emoji.items():
+            if color.lower() in post['title'].lower():
+                hearts.append(emoji)
+
+        # Join all detected hearts, or leave empty if none
+        heart_emojis = " ".join(hearts)
+
+        # Add title and URL with or without hearts
+        message += f"{heart_emojis} {post['title']}:\n🔗 {base_url}{post['url']}\n\n"
     
     # Footer
     message += json_template['footer']

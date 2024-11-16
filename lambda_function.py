@@ -32,4 +32,4 @@ def lambda_handler(event, context):
     except Exception as e:
         print(f"Error occurred: {str(e)}")
 
-lambda_handler("","")
+# lambda_handler("","")

@@ -39,7 +39,7 @@ def create_message(json_template, posts, platform=""):
         hearts = []
         for color, emoji in color_to_emoji.items():
             if color.lower() in post['title'].lower():
-                hearts.append(emoji)
+                hearts.insert(0, emoji) 
 
         # Join all detected hearts, or leave empty if none
         heart_emojis = " ".join(hearts)

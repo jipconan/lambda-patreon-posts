@@ -12,7 +12,7 @@ SINGAPORE_TZ = timezone(timedelta(hours=8))
 def fetch_posts(period=datetime.now(SINGAPORE_TZ).date()):
     access_token = os.getenv("PATRON_API_KEY")
     campaign_id = os.getenv("PATRON_CAMPAIGN_ID")
-    print("access_token:", access_token)
+    # print("access_token:", access_token)
 
     # Make an API call to get today's posts
     response = requests.get(

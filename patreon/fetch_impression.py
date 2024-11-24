@@ -8,7 +8,7 @@ def fetch_impression():
     }
     headers = {
         # 'Cookie': f'csrf_token={csrf_token}',
-        'Cookie': f'session_id=qIzqOoJoLfkPm4vXqKWhIWu7URPOafTCtEUpWUhgXr8;',
+        'Cookie': f'session_id={"add_in_hardcoded_cookie"};',
         'Content-Type': 'application/json',
     }
 

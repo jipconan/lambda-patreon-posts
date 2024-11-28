@@ -36,34 +36,16 @@ def load_message_template():
 
 # lambda_handler("","")
 
+# Test the login_patreon function
 # def lambda_handler(event, context):
 #     try:
-#         # Log in to Patreon and fetch the CSRF token
+#         # Log in to Patreon
 #         print("[LOG] Logging in to Patreon...")
-#         csrf_token = login_patreon()
-        
-#         if not csrf_token:
-#             raise Exception("Failed to log in to Patreon. CSRF token not retrieved.")
-        
-#         print(f"[LOG] Retrieved CSRF Token: {csrf_token}")
-        
-#         # Prepare the response body as a string, using json.dumps() to serialize
-#         response_body = {
-#             "csrf_token": csrf_token
-#         }
-
-#         return {
-#             "statusCode": 200,
-#             "body": json.dumps(response_body)  # Serialize the dictionary to a JSON string
-#         }
-    
+#         login_patreon()
 #     except Exception as e:
-#         print(f"[EXCEPTION] Error occurred: {str(e)}")
-#         return {
-#             "statusCode": 500,
-#             "body": json.dumps({"error": str(e)})  # Serialize error message to JSON string
-#         }
+#         print(f"Error occurred: {str(e)}")
 
+# Test the fetch_impression function
 def lambda_handler(event, context):
     try:
         # Fetch impressions directly using the hardcoded cookie
@@ -72,8 +54,6 @@ def lambda_handler(event, context):
 
         if not impressions:
             raise Exception("Failed to fetch impressions.")
-        
-        print(f"[LOG] Retrieved Impressions: {impressions}")
         
         # Prepare the response body as a string, using json.dumps() to serialize
         response_body = {

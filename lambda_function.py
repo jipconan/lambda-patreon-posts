@@ -9,36 +9,32 @@ from patreon.fetch_impression import fetch_impression
 from google.create_google_sheet_add_data import create_google_sheet_add_data
 
 # Load the message template from the JSON file
-# def load_message_template():
-#     with open('src/message_template.json', 'r', encoding='utf-8') as f: 
-#         return json.load(f)
+def load_message_template():
+    with open('src/message_template.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 # Main lambda handler
-# def lambda_handler(event, context):
-#     try:
-#         same_day_posts = fetch_posts()
-
-#         if same_day_posts:
-#             # Load the message template``
-#             json_template = load_message_template()
-
-#             # Generate the message using the template function
-#             messageTwitter = create_message(json_template, same_day_posts, "twitter")
-#             messageDiscord = create_message(json_template, same_day_posts, "discord")
-            
-#             # Post the combined message to Twitter and Discord
-#             post_to_twitter(messageTwitter)
-#             post_to_discord(messageDiscord)
-#             print(f"Posted to Twitter: {messageTwitter}")
-#             print(f"Posted to Discord: {messageDiscord}")
-#         else:
-#             print("No new posts today.")
-#     except Exception as e:
-#         print(f"Error occurred: {str(e)}")
-
-# fetch_post_id function
 def lambda_handler(event, context):
     try:
+        # Fetch posts for the current day
+        same_day_posts = fetch_posts()
+
+        if same_day_posts:
+            # Load the message template
+            json_template = load_message_template()
+
+            # Generate the message for Twitter and Discord
+            messageTwitter = create_message(json_template, same_day_posts, "twitter")
+            messageDiscord = create_message(json_template, same_day_posts, "discord")
+            
+            # Post the combined message to Twitter and Discord
+            post_to_twitter(messageTwitter)
+            post_to_discord(messageDiscord)
+            print(f"Posted to Twitter: {messageTwitter}")
+            print(f"Posted to Discord: {messageDiscord}")
+        else:
+            print("No new posts today.")
+
         # Fetch all post IDs
         post_ids = fetch_all_post_ids()
 

@@ -58,3 +58,16 @@ def fetch_posts(period=datetime.now(SINGAPORE_TZ).date()):
             })
     
     return today_posts
+
+# Example usage
+# if __name__ == '__main__':
+#     # Fetch posts for today
+#     today_posts = fetch_posts()
+#     print(today_posts)
+#     print(f"Number of posts today: {len(today_posts)}")
+#     print("Posts:")
+#     for post in today_posts:
+#         print(f"Title: {post['title']}")
+#         print(f"URL: {post['url']}")
+#         print(f"Content: {post['content']}")
+#         print("----")

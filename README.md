@@ -26,4 +26,6 @@ The application performs several key functions:
 
 This Lambda function is triggered on a set schedule, capturing the latest campaign content daily. Users can customize the posting schedule by updating the configuration in the AWS console.
 
----
+## Setup & Deployment
+
+I will update here real soon!

@@ -9,8 +9,8 @@ def load_message_template():
     with open('src/message_template.json', 'r', encoding='utf-8') as f: 
         return json.load(f)
 
-# Main lambda handler
-def lambda_handler(event, context):
+# Main function handler
+def main(event, context):
     try:
         same_day_posts = fetch_posts()
 
@@ -32,4 +32,4 @@ def lambda_handler(event, context):
     except Exception as e:
         print(f"Error occurred: {str(e)}")
 
-lambda_handler("","")
+# main("","")

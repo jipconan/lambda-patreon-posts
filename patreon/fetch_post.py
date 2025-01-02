@@ -3,7 +3,7 @@ import requests
 import os
 from dotenv import load_dotenv
 
-# load_dotenv("patreon/.env")
+load_dotenv("patreon/.env")
 
 # Singapore time zone offset
 SINGAPORE_TZ = timezone(timedelta(hours=8))
